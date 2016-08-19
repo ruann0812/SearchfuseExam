@@ -1,0 +1,31 @@
+<style type="text/css">
+
+			a:active {background-color:#00CCFF;}
+
+
+#body{
+	background-image: url("../images/pic2.jpg");
+    background-color: #cccccc;
+    background-repeat:no-repeat;
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+}
+
+.add-container{
+	width: 300px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+.logout-add{
+	float: right;
+	margin-top: -10px;
+}
+
+.footerLogin{
+	color: #2B59C3;
+	font-weight: 900;
+}
+
+</style>

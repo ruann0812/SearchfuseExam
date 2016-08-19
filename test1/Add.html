@@ -1,0 +1,96 @@
+<?php
+	session_start();
+	if (!(isset($_SESSION['userCount']) && $_SESSION['userCount'] == 1)) {
+		session_destroy();
+		header("location: login.html");
+	}
+
+	$conn = mysql_connect("localhost", "root", "");
+    if(!$conn){
+		die('Could not connect' . mysql_error());
+	}
+	mysql_select_db("practiceDB1",$conn) or die('Error querying database' . mysql_error());
+	
+?>
+
+<html>
+<head>
+	<title>Add</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="logout-add"> <a href="logout.php">Logout</a></div>	
+	<div class="add-container">
+		<div style="color:red;">
+				<?php
+				if (isset($_SESSION['result']) && $_SESSION['result'] == 1) {?>
+					<span style="color: Red;"><center><h3>Customer successfully added!</h3></center></span>	
+				<?php
+					$_SESSION['result'] = 0;
+					}
+					if(isset($_SESSION['result']) && $_SESSION['result'] == 0) {
+						echo $_SESSION['successErrorMSG'];
+
+					} ?>
+	
+		</div>
+		<h1>ADD Information</h1>
+			<form action="add.php" method="POST" enctype="multipart/form-data">
+				<label>Firstname: </label>
+				  <input type="text" name="fname" required><br><br>
+				<label>Lastname: </label>
+				  <input type="text" name="lname" required><br><br>
+				<label>Email Address: </label>
+				  <input type="text" name="eadd" required><br><br>
+				<label>Address: </label>
+				  <input type="text" name="add" required><br><br>
+				<label>Gender: </label>
+				  <input type="radio" name="gender" value="male" checked> Male &nbsp;&nbsp;&nbsp;
+				  <input type="radio" name="gender" value="female"> Female<br><br>
+				  <input type="submit" id="BTNsave" name="save" value="SAVE" >
+				  
+			</form>
+	</div>
+
+<div>
+	<table border = "2" align="center" >
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email Address</th>
+			<th>Address</th>
+			<th>Gender</th>
+			<th>Update</th>
+			<th>Delete</th>
+		</tr>
+		<?php
+				$sql = "SELECT * from customer order by id ASC";
+				$result = mysql_query($sql);
+				while ($row = mysql_fetch_array($result)) {
+		?>
+		<tr>
+			<td><?php echo $row['Fname']?></td>
+			<td><?php echo $row['Lname']?></td>
+			<td><?php echo $row['emailAdd']?></td>
+			<td><?php echo $row['Address']?></td>
+			<td><?php echo $row['Gender']?></td>
+
+			<td><a href="">EDIT</a></td>
+			<td><a href="">DELETE</a></td>
+		</tr>		<?php } ?>
+
+	</table>
+
+</div>
+
+<br><br>
+
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
+<?php
+
+$_SESSION['successErrorMSG']="";
+
+?>

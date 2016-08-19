@@ -1,0 +1,66 @@
+<?php session_start(); 
+$conn = mysql_connect("localhost", "root", "");
+    mysql_select_db("assetdb",$conn);	
+?>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="body">	
+	<div align="center" id="container">
+	<br/>
+		<div class="panel panel-primary" style="margin: 0 auto; margin-top:85px;width: 350px; height: 260px;">
+			<div class="panel-heading">Admin Login</div>
+				<div class="panel-body">
+					<form action="Login.php" method="POST" enctype="multipart/form-data" role="form">
+						<?php
+							if (isset($_SESSION['count']) && $_SESSION['count'] >= 5) {?>
+								<span style="color: Red;"><center><h3>Admin Account is Block</h3></center></span>
+								<span style="color: Red;"><center><h3>You are Not The Administrator</h3></center></span>
+								<span><center><a href="logout.php" style="text-decoration:none; color: blue; font-size:15px;">Login Again</a></center></span>
+
+						<?php }else {?>				
+								<input type="text" class="form-control" id="Uname" name="uname" placeholder="Username"><br>
+								<input type="password" class="form-control" id="Pword" name="pword" placeholder="Password"><br><br>
+								<input type="submit" class="btn btn-info" name="login" value="LOGIN">
+						<?php } ?>
+					</form>
+				</div>	<br>
+								<div style="color:red; font-weight: 900;">
+									<?php
+										if(isset($_SESSION['errorlogin'])){
+										echo $_SESSION['errorlogin'];}
+									?>
+								</div><br>		
+								<div style="color:red; font-weight: 900;">
+									<?php
+										if(isset($_SESSION['loginattemp'])){
+										echo $_SESSION['loginattemp'];}		
+									?>
+								</div>			
+
+		</div>
+	</div>	
+<br/><br/><br/><br/>
+	<center>
+	<footer>
+		<div id="footer" class="footerLogin">
+			<p>Copyright (c) 2016 ruannnnn. All rights reserved.</p>
+		</div>
+	</footer>
+	</center>
+</div>
+
+</body>
+</html>
+
+<?php
+$_SESSION['errorlogin']="";
+$_SESSION['loginattemp']="";
+?>
