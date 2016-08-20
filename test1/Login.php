@@ -5,7 +5,7 @@ session_start();
 		die('Could not connect' . mysql_error());
 	}
 	echo 'Connected successfully';
-	mysql_select_db("practiceDB1",$conn) or die('Error querying database' . mysql_error());
+	mysql_select_db("testSF",$conn) or die('Error querying database' . mysql_error());
 
 $UserName = $_POST['uname'];
 $PassWord = $_POST['pword'];
@@ -20,7 +20,7 @@ $_SESSION['userCount'] = $count;
 if($count == 1){
 	$admin = mysql_fetch_assoc($result);
 	session_write_close();
-	header("location: Add.html");
+	header("location: dashboard.html");
 }else {
 	$_SESSION['count'] = $_SESSION['count']+1;
 	if($_SESSION['count']==1){

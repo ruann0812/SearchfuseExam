@@ -10,6 +10,7 @@
         die('Could not connect' . mysql_error());
     }
     mysql_select_db("testSF",$conn) or die('Error querying database' . mysql_error());
+        date_default_timezone_set("Asia/Manila");
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add User</title>
+    <title>Add Task</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -100,14 +101,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Add User
+                            Add Task
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> Add User
+                                <i class="fa fa-edit"></i> Add Task
                             </li>
                         </ol>
                     </div>
@@ -118,7 +119,7 @@
                         <div style="color:red;">
                                 <?php
                                 if (isset($_SESSION['result']) && $_SESSION['result'] == 1) {?>
-                                    <span style="color: Red;"><center><h3>User successfully added!</h3></center></span> 
+                                    <span style="color: Red;"><center><h3>Task successfully added!</h3></center></span> 
                                 <?php
                                     $_SESSION['result'] = 0;
                                     }
@@ -130,29 +131,30 @@
                     
                         </div>
                             <h1>Information</h1>
-                            <form action="add.php" method="POST" enctype="multipart/form-data">
-                                <label>Firstname: </label>
-                                    <input type="text" name="fname" class="form-control" required><br>
-                                <label>Lastname: </label>
-                                    <input type="text" name="lname" class="form-control" required><br>
-
+                            <form action="addTask.php" method="POST" enctype="multipart/form-data">
+                                <label>Task Name: </label>
+                                    <input type="text" name="taskName" class="form-control" required><br>
                                 <div class="form-group">
-                                    <label>Role: </label>
-                                    <select name="role_select" class="form-control" required>
+                                    <label>Assignee: </label>
+                                    <select name="user_select" class="form-control">
                                         <option value="" selected="selected">Select</option>
                                             <?php 
-                                                $qry = mysql_query("SELECT * from Roles ORDER BY id_role ASC");
+                                                $qry = mysql_query("SELECT * from User ORDER BY Lname ASC");
                                                 while ($row = mysql_fetch_array($qry)) {
                                             ?>
-                                        <option value="<?php echo $row['id_role'];?>"> <?php echo $row['role_name']?> </option>
+                                        <option value="<?php echo $row['user_id'];?>"> <?php echo $row['Lname'].', '. $row['Fname'];?></option>
                                             <?php }?>
                                     </select>
                                 </div><br>
-
-                                <label>Username: </label>
-                                    <input type="text" name="uname" class="form-control" required><br>
-                                <label>Password: </label>
-                                    <input type="password" name="passWord" class="form-control" required><br>
+                                <label>Status: </label>
+                                    <select name="stats_select" class="form-control" required>
+                                        <option value="" selected="selected">Select</option>
+                                        <option value="Waiting for start" >Waiting for start</option>
+                                        <option value="In Progress" >In Progress</option>
+                                        <option value="Pending" >Pending</option>
+                                    </select><br>
+                                <label>Description:</label>
+                                    <textarea class="form-control" rows="3" name="task_descrip" required></textarea><br>
                                     <input type="submit" id="BTNsave" name="save" value="SAVE" class="btn btn-default"><br><br>
                             </form>
                     </div>

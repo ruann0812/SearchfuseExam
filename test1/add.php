@@ -4,16 +4,16 @@ session_start();
     if(!$conn){
 		die('Could not connect' . mysql_error());
 	}
-	mysql_select_db("practiceDB1",$conn) or die('Error querying database' . mysql_error());
+	mysql_select_db("testSF",$conn) or die('Error querying database' . mysql_error());
 
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
-$emaildd = $_POST['eadd'];
-$aDDress = $_POST['add'];
-$gender = $_POST['gender'];
+$role_select = $_POST['role_select'];
+$uname = $_POST['uname'];
+$passWord = $_POST['passWord'];
 
-$qry = "INSERT into customer(Fname,Lname,emailAdd,Address,Gender) values ('$fname',
-		'$lname','$emaildd','$aDDress', '$gender')";
+$qry = "INSERT into User(role_id,Fname,Lname,Uname,Pword) values ('$role_select','$fname',
+		'$lname','$uname','$passWord')";
 $result = mysql_query($qry);
 
 $_SESSION['result'] = $result;
@@ -23,13 +23,16 @@ if ($result == 1) {
 	header("location: Add.html");
 }else {
 
-	$qry = "select * from customer where Fname='$fname' AND Lname='$lname' AND emailAdd='$emaildd' ";
+	$qry = "select * from User where Fname='$fname' AND Lname='$lname'";
+	$qry1 = "SELECT * from User where Uname='$uname'";
 	$result = mysql_query($qry);
-		if (mysql_num_rows($result) > 0) {
-				$_SESSION['successErrorMSG'] = "<h3>Customer already exist!</h3>";
+	$result2 = mysql_query($qry1);
+		if (mysql_num_rows($result) > 0 || mysql_num_rows($result2) > 0) {
+				$_SESSION['successErrorMSG'] = "<h3>User already exist!</h3>";
 			}else {
 				echo "/None";	
 			}
+
 	header("location: Add.html");
 }
 
