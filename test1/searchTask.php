@@ -61,18 +61,14 @@ function pendingSearch($username){
 
     <title>Search Task</title>
 
-    <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
     <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
     <script src="https://use.fontawesome.com/0d0a485630.js"></script>
 
 </head>
@@ -81,7 +77,6 @@ function pendingSearch($username){
 
     <div id="wrapper">
 
-        <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.html">System Admin</a>
@@ -133,7 +128,6 @@ function pendingSearch($username){
 
             <div class="container-fluid">
 
-                <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
@@ -177,20 +171,14 @@ function pendingSearch($username){
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
 
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
 
-    <!-- jQuery -->
     <script src="js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
